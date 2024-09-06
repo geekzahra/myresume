@@ -38,7 +38,7 @@ export const useCameraStore = create((set) => ({
 
     // camera properties
 
-    maxDistancce: 25,
+    maxDistance: 25,
     minDistance: 2,
     maxAzimuthAngle: Math.PI,
     minAzimuthAngle: Math.PI * 0.5,

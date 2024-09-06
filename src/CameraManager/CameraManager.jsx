@@ -9,7 +9,7 @@ export const CameraManager = () => {
 
     const cameraState = useCameraStore((state) => state.cameraState);
 
-    const maxDistancce = useCameraStore((state) => state.maxDistancce);
+    const maxDistance = useCameraStore((state) => state.maxDistance);
     const minDistance = useCameraStore((state) => state.minDistance);
     const maxAzimuthAngle = useCameraStore((state) => state.maxAzimuthAngle);
     const minAzimuthAngle = useCameraStore((state) => state.minAzimuthAngle);
@@ -24,7 +24,7 @@ export const CameraManager = () => {
             useCameraStore.setState({ truckSpeed: 0.5 });
             useCameraStore.setState({ dollyToCursor: true });
             useCameraStore.setState({ minDistance: 2 });
-            useCameraStore.setState({ maxDistancce: 25 });
+            useCameraStore.setState({ maxDistance: 25 });
             useCameraStore.setState({ minPolarAngle: Math.PI * 0.1 });
             useCameraStore.setState({ maxPolarAngle: Math.PI * 0.45 });
             useCameraStore.setState({ minAzimuthAngle: Math.PI * 0.5 });
@@ -36,7 +36,7 @@ export const CameraManager = () => {
             useCameraStore.setState({ truckSpeed: 0 });
             useCameraStore.setState({ dollyToCursor: false });
             useCameraStore.setState({ minDistance: 5.65 });
-            useCameraStore.setState({ maxDistancce: 7.1 });
+            useCameraStore.setState({ maxDistance: 7.1 });
             useCameraStore.setState({ minPolarAngle: Math.PI * 0.5 });
             useCameraStore.setState({ maxPolarAngle: Math.PI * 0.5 });
             useCameraStore.setState({ minAzimuthAngle: Math.PI });
@@ -48,7 +48,7 @@ export const CameraManager = () => {
             useCameraStore.setState({ truckSpeed: 0 });
             useCameraStore.setState({ dollyToCursor: false });
             useCameraStore.setState({ minDistance: 4.2 });
-            useCameraStore.setState({ maxDistancce: 6 });
+            useCameraStore.setState({ maxDistance: 6 });
             useCameraStore.setState({ minPolarAngle: Math.PI * 0.435 });
             useCameraStore.setState({ maxPolarAngle: Math.PI * 0.435 });
             useCameraStore.setState({ minAzimuthAngle: Math.PI * 0.689 });
@@ -60,7 +60,7 @@ export const CameraManager = () => {
             useCameraStore.setState({ truckSpeed: 0 });
             useCameraStore.setState({ dollyToCursor: false });
             useCameraStore.setState({ minDistance: 5.6 });
-            useCameraStore.setState({ maxDistancce: 6.5 });
+            useCameraStore.setState({ maxDistance: 6.5 });
             useCameraStore.setState({ minPolarAngle: Math.PI * 0.5 });
             useCameraStore.setState({ maxPolarAngle: Math.PI * 0.5 });
             useCameraStore.setState({ minAzimuthAngle: 0 });
@@ -72,7 +72,7 @@ export const CameraManager = () => {
             useCameraStore.setState({ truckSpeed: 0 });
             useCameraStore.setState({ dollyToCursor: false });
             useCameraStore.setState({ minDistance: 8.8 });
-            useCameraStore.setState({ maxDistancce: 9.2 });
+            useCameraStore.setState({ maxDistance: 9.2 });
             useCameraStore.setState({ minPolarAngle: Math.PI * 0.03 });
             useCameraStore.setState({ maxPolarAngle: Math.PI * 0.036 });
             useCameraStore.setState({ minAzimuthAngle: Math.PI * 0.83 });
@@ -92,7 +92,7 @@ export const CameraManager = () => {
             useCameraStore.setState({ truckSpeed: 0 });
             useCameraStore.setState({ dollyToCursor: true });
             useCameraStore.setState({ minDistance: 4 });
-            useCameraStore.setState({ maxDistancce: 8 });
+            useCameraStore.setState({ maxDistance: 8 });
             useCameraStore.setState({ minPolarAngle: Math.PI * 0.4999 });
             useCameraStore.setState({ maxPolarAngle: Math.PI * 0.5 });
             useCameraStore.setState({ minAzimuthAngle: Math.PI * 0.5 });
@@ -117,7 +117,7 @@ export const CameraManager = () => {
             dollySpeed={1.2}
             truckSpeed={truckSpeed}
             minDistance={minDistance}
-            maxDistance={maxDistancce}
+            maxDistance={maxDistance}
             smoothTime={0.8}
             maxAzimuthAngle={maxAzimuthAngle}
             minAzimuthAngle={minAzimuthAngle}
