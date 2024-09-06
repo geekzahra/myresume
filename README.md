@@ -95,7 +95,6 @@ This project is licensed under the [MIT License](LICENSE).
 
 **For more information, [contact me](mailto:geekzahra@gmail.com).**
 
-Happy coding!
 
 ### Key Points to Customize:
 
@@ -104,3 +103,5 @@ Happy coding!
 - **License**: Ensure the license section matches the actual license file you include in your repository.
 
 Feel free to adjust or expand the sections based on the specific needs and features of your project.
+
+Happy coding!🌱
