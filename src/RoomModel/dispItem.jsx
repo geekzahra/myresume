@@ -1,5 +1,3 @@
-/* eslint-disable react/display-name */
-/* eslint-disable react/prop-types */
 import { useTexture } from '@react-three/drei';
 import { extend } from '@react-three/fiber';
 import { Select } from '@react-three/postprocessing';
@@ -11,49 +9,40 @@ import { useCameraStore } from '../helper/CameraStore';
 import TextureMaterial from './textures/TextureMaterial';
 extend({ TextureMaterial });
 
+// The DispItem component handles the display items in the 3D scene
 const DispItem = React.memo(({ toggle, nodes }) => {
-    // Refs for various display items
-    const dispItem = useRef();
-    const desktopdisp = useRef();
-    const musicdisp = useRef();
-    const homedisp = useRef();
-    const smartphonedisp = useRef();
-    const tvdisp = useRef();
+    // Refs for display items to apply animations and materials
+    const dispItem = useRef(); // Main display item
+    const desktopdisp = useRef(); // Desktop display
+    const musicdisp = useRef(); // Music display
+    const homedisp = useRef(); // Home display
+    const smartphonedisp = useRef(); // Smartphone display
+    const tvdisp = useRef(); // TV display
 
-    // Update materials based on the toggle state using gsap
+    // Animate the 'NightMix' property of each texture material based on 'toggle' state
     useEffect(() => {
-        gsap.to(dispItem.current.uniforms.NightMix, {
-            value: toggle ? 1 : 0,
-            duration: 1
-        });
-        gsap.to(desktopdisp.current.uniforms.NightMix, {
-            value: toggle ? 1 : 0,
-            duration: 1
-        });
-        gsap.to(musicdisp.current.uniforms.NightMix, {
-            value: toggle ? 1 : 0,
-            duration: 1
-        });
-        gsap.to(homedisp.current.uniforms.NightMix, {
-            value: toggle ? 1 : 0,
-            duration: 1
-        });
-        gsap.to(smartphonedisp.current.uniforms.NightMix, {
-            value: toggle ? 1 : 0,
-            duration: 1
-        });
-        gsap.to(tvdisp.current.uniforms.NightMix, {
-            value: toggle ? 1 : 0,
-            duration: 1
-        });
+        const animateMaterial = (ref) => {
+            gsap.to(ref.current.uniforms.NightMix, {
+                value: toggle ? 1 : 0,
+                duration: 1
+            });
+        };
+
+        // Apply the animation to all display items
+        animateMaterial(dispItem);
+        animateMaterial(desktopdisp);
+        animateMaterial(musicdisp);
+        animateMaterial(homedisp);
+        animateMaterial(smartphonedisp);
+        animateMaterial(tvdisp);
     }, [toggle]);
 
-    // Load textures
+    // Load textures for different displays
     const dBakeddisp = useTexture('./assets/boardBakedDcmp.webp');
-    dBakeddisp.flipY = false;
-    dBakeddisp.magFilter = THREE.LinearFilter;
-    dBakeddisp.minFilter = THREE.NearestFilter;
-    dBakeddisp.generateMipmaps = false;
+    dBakeddisp.flipY = false; // Correct orientation for textures
+    dBakeddisp.magFilter = THREE.LinearFilter; // Texture filter for magnification
+    dBakeddisp.minFilter = THREE.NearestFilter; // Texture filter for minification
+    dBakeddisp.generateMipmaps = false; // Disable mipmap generation to save resources
 
     const nBakeddisp = useTexture('./assets/boardBakedNcmp.webp');
     nBakeddisp.flipY = false;
@@ -62,43 +51,46 @@ const DispItem = React.memo(({ toggle, nodes }) => {
     nBakeddisp.generateMipmaps = false;
 
     const lightMapdisp = useTexture('./assets/boardBakedLMAPcmp.webp');
-    nBakeddisp.flipY = false;
-    nBakeddisp.magFilter = THREE.LinearFilter;
-    nBakeddisp.minFilter = THREE.NearestFilter;
-    nBakeddisp.generateMipmaps = false;
+    lightMapdisp.flipY = false;
+    lightMapdisp.magFilter = THREE.LinearFilter;
+    lightMapdisp.minFilter = THREE.NearestFilter;
+    lightMapdisp.generateMipmaps = false;
 
-    // Define material properties
+    // Define the initial properties for the texture materials
     const TextureMaterialDisps = {
-        dbakedm: dBakeddisp,
-        nbakedm: nBakeddisp,
-        lightMapm: lightMapdisp,
-        NightMix: 0,
-        lightBoardColor: '#fff',
-        lightBoardStrength: 0,
-        lightPcColor: '#fff',
-        lightPcStrength: 0,
-        lightDeskColor: '#fff',
-        lightDeskStrength: 0
+        dbakedm: dBakeddisp, // Diffuse baked texture
+        nbakedm: nBakeddisp, // Normal baked texture
+        lightMapm: lightMapdisp, // Light map texture
+        NightMix: 0, // Default mix value for night mode
+        lightBoardColor: '#fff', // Color for light board
+        lightBoardStrength: 0, // Strength of light on board
+        lightPcColor: '#fff', // Color for PC light
+        lightPcStrength: 0, // Strength of PC light
+        lightDeskColor: '#fff', // Color for desk light
+        lightDeskStrength: 0 // Strength of desk light
     };
 
-    const [hovered, setHover] = useState(false);
-    const [hoveredMonitor, setHoveredMonitor] = useState(null);
-    const [hoveredLaptop, setHoveredLaptop] = useState(null);
-    const [hoveredTv, setHoveredTv] = useState(null);
-    const [hoveredSmartphone, setHoveredSmartphone] = useState(null);
-    const [hoveredHome, setHoveredHome] = useState(null);
+    // State hooks to manage hover effects and selected display
+    const [hovered, setHover] = useState(false); // General hover state
+    const [hoveredMonitor, setHoveredMonitor] = useState(null); // Hover state for monitor
+    const [hoveredLaptop, setHoveredLaptop] = useState(null); // Hover state for laptop
+    const [hoveredTv, setHoveredTv] = useState(null); // Hover state for TV
+    const [hoveredSmartphone, setHoveredSmartphone] = useState(null); // Hover state for smartphone
+    const [hoveredHome, setHoveredHome] = useState(null); // Hover state for home display
 
-    // Change cursor style based on hover state
+    // Update the cursor style based on hover state
     useEffect(
-        () => void (document.body.style.cursor = hovered ? 'pointer' : 'auto'),
+        () => {
+            document.body.style.cursor = hovered ? 'pointer' : 'auto';
+        },
         [hovered]
     );
 
-    // Callbacks for hover events
+    // Callbacks to handle hover events
     const onPointerOver = useCallback(() => setHover(true), []);
     const onPointerOut = useCallback(() => setHover(false), []);
 
-    // Retrieve camera states from the store
+    // Retrieve camera states from the store to handle interactions
     const cameraState = useCameraStore((state) => state.cameraState);
     const defaultState = useCameraStore((state) => state.default);
     const desktopState = useCameraStore((state) => state.desktop);
@@ -110,10 +102,10 @@ const DispItem = React.memo(({ toggle, nodes }) => {
         <>
             {/* Main display item */}
             <mesh
-                geometry={nodes.dispItem.geometry}
-                position={nodes.dispItem.position}
-                rotation={nodes.dispItem.rotation}
-                onPointerover={
+                geometry={nodes.dispItem.geometry} // Geometry for the main display
+                position={nodes.dispItem.position} // Position of the main display
+                rotation={nodes.dispItem.rotation} // Rotation of the main display
+                onPointerOver={
                     cameraState === 'displayBoard' ? onPointerOut : null
                 }
                 onPointerOut={
@@ -128,41 +120,41 @@ const DispItem = React.memo(({ toggle, nodes }) => {
 
             {/* Rope mesh */}
             <mesh
-                geometry={nodes.rope.geometry}
-                position={nodes.rope.position}
-                rotation={nodes.rope.rotation}
+                geometry={nodes.rope.geometry} // Geometry for the rope
+                position={nodes.rope.position} // Position of the rope
+                rotation={nodes.rope.rotation} // Rotation of the rope
             >
-                <meshBasicMaterial color={'#160000'} />
+                <meshBasicMaterial color={'#160000'} /> {/* Basic material for the rope */}
             </mesh>
 
             {/* Desktop display */}
             <Select enabled={hoveredMonitor}>
                 <mesh
-                    geometry={nodes.desktop.geometry}
-                    position={nodes.desktop.position}
-                    rotation={nodes.desktop.rotation}
+                    geometry={nodes.desktop.geometry} // Geometry for the desktop display
+                    position={nodes.desktop.position} // Position of the desktop display
+                    rotation={nodes.desktop.rotation} // Rotation of the desktop display
                     onClick={
                         cameraState === 'displayBoard'
                             ? () => {
-                                  desktopState();
-                                  setHoveredMonitor(false);
-                                  onPointerOut();
+                                  desktopState(); // Switch to desktop view
+                                  setHoveredMonitor(false); // Reset hover state
+                                  onPointerOut(); // Reset cursor
                               }
                             : undefined
                     }
                     onPointerOver={
                         cameraState === 'displayBoard'
                             ? () => {
-                                  onPointerOver();
-                                  setHoveredMonitor(true);
+                                  onPointerOver(); // Set cursor to pointer
+                                  setHoveredMonitor(true); // Set hover state
                               }
                             : null
                     }
                     onPointerOut={
                         cameraState === 'displayBoard'
                             ? () => {
-                                  onPointerOut();
-                                  setHoveredMonitor(false);
+                                  onPointerOut(); // Reset cursor
+                                  setHoveredMonitor(false); // Reset hover state
                               }
                             : null
                     }
@@ -177,33 +169,33 @@ const DispItem = React.memo(({ toggle, nodes }) => {
             {/* Music display */}
             <Select enabled={hoveredLaptop}>
                 <mesh
-                    geometry={nodes.music.geometry}
-                    position={nodes.music.position}
-                    rotation={nodes.music.rotation}
+                    geometry={nodes.music.geometry} // Geometry for the music display
+                    position={nodes.music.position} // Position of the music display
+                    rotation={nodes.music.rotation} // Rotation of the music display
                     onClick={
                         cameraState === 'displayBoard'
                             ? cameraState === 'laptop'
                                 ? undefined
                                 : () => {
-                                      laptopState();
-                                      setHoveredLaptop(false);
-                                      onPointerOut();
+                                      laptopState(); // Switch to laptop view
+                                      setHoveredLaptop(false); // Reset hover state
+                                      onPointerOut(); // Reset cursor
                                   }
                             : null
                     }
                     onPointerOver={
                         cameraState === 'displayBoard'
                             ? () => {
-                                  onPointerOver();
-                                  setHoveredLaptop(true);
+                                  onPointerOver(); // Set cursor to pointer
+                                  setHoveredLaptop(true); // Set hover state
                               }
                             : null
                     }
                     onPointerOut={
                         cameraState === 'displayBoard'
                             ? () => {
-                                  onPointerOut();
-                                  setHoveredLaptop(false);
+                                  onPointerOut(); // Reset cursor
+                                  setHoveredLaptop(false); // Reset hover state
                               }
                             : null
                     }
@@ -218,33 +210,33 @@ const DispItem = React.memo(({ toggle, nodes }) => {
             {/* Home display */}
             <Select enabled={hoveredHome}>
                 <mesh
-                    geometry={nodes.home.geometry}
-                    position={nodes.home.position}
-                    rotation={nodes.home.rotation}
+                    geometry={nodes.home.geometry} // Geometry for the home display
+                    position={nodes.home.position} // Position of the home display
+                    rotation={nodes.home.rotation} // Rotation of the home display
                     onClick={
                         cameraState === 'displayBoard'
                             ? cameraState === 'default'
                                 ? undefined
                                 : () => {
-                                      defaultState();
-                                      setHoveredHome(false);
-                                      onPointerOut();
+                                      defaultState(); // Switch to default view
+                                      setHoveredHome(false); // Reset hover state
+                                      onPointerOut(); // Reset cursor
                                   }
                             : null
                     }
                     onPointerOver={
                         cameraState === 'displayBoard'
                             ? () => {
-                                  onPointerOver();
-                                  setHoveredHome(true);
+                                  onPointerOver(); // Set cursor to pointer
+                                  setHoveredHome(true); // Set hover state
                               }
                             : null
                     }
                     onPointerOut={
                         cameraState === 'displayBoard'
                             ? () => {
-                                  onPointerOut();
-                                  setHoveredHome(false);
+                                  onPointerOut(); // Reset cursor
+                                  setHoveredHome(false); // Reset hover state
                               }
                             : null
                     }
@@ -256,33 +248,33 @@ const DispItem = React.memo(({ toggle, nodes }) => {
             {/* Smartphone display */}
             <Select enabled={hoveredSmartphone}>
                 <mesh
-                    geometry={nodes.smartphone.geometry}
-                    position={nodes.smartphone.position}
-                    rotation={nodes.smartphone.rotation}
+                    geometry={nodes.smartphone.geometry} // Geometry for the smartphone display
+                    position={nodes.smartphone.position} // Position of the smartphone display
+                    rotation={nodes.smartphone.rotation} // Rotation of the smartphone display
                     onClick={
                         cameraState === 'displayBoard'
                             ? cameraState === 'smartphone'
                                 ? undefined
                                 : () => {
-                                      smartphoneState();
-                                      setHoveredSmartphone(false);
-                                      onPointerOut();
+                                      smartphoneState(); // Switch to smartphone view
+                                      setHoveredSmartphone(false); // Reset hover state
+                                      onPointerOut(); // Reset cursor
                                   }
                             : null
                     }
                     onPointerOver={
                         cameraState === 'displayBoard'
                             ? () => {
-                                  onPointerOver();
-                                  setHoveredSmartphone(true);
+                                  onPointerOver(); // Set cursor to pointer
+                                  setHoveredSmartphone(true); // Set hover state
                               }
                             : null
                     }
                     onPointerOut={
                         cameraState === 'displayBoard'
                             ? () => {
-                                  onPointerOut();
-                                  setHoveredSmartphone(false);
+                                  onPointerOut(); // Reset cursor
+                                  setHoveredSmartphone(false); // Reset hover state
                               }
                             : null
                     }
@@ -297,33 +289,33 @@ const DispItem = React.memo(({ toggle, nodes }) => {
             {/* TV display */}
             <Select enabled={hoveredTv}>
                 <mesh
-                    geometry={nodes.tv.geometry}
-                    position={nodes.tv.position}
-                    rotation={nodes.tv.rotation}
+                    geometry={nodes.tv.geometry} // Geometry for the TV display
+                    position={nodes.tv.position} // Position of the TV display
+                    rotation={nodes.tv.rotation} // Rotation of the TV display
                     onClick={
                         cameraState === 'displayBoard'
                             ? cameraState === 'tv'
                                 ? undefined
                                 : () => {
-                                      tvState();
-                                      setHoveredTv(false);
-                                      onPointerOut();
+                                      tvState(); // Switch to TV view
+                                      setHoveredTv(false); // Reset hover state
+                                      onPointerOut(); // Reset cursor
                                   }
                             : null
                     }
                     onPointerOver={
                         cameraState === 'displayBoard'
                             ? () => {
-                                  onPointerOver();
-                                  setHoveredTv(true);
+                                  onPointerOver(); // Set cursor to pointer
+                                  setHoveredTv(true); // Set hover state
                               }
                             : null
                     }
                     onPointerOut={
                         cameraState === 'displayBoard'
                             ? () => {
-                                  onPointerOut();
-                                  setHoveredTv(false);
+                                  onPointerOut(); // Reset cursor
+                                  setHoveredTv(false); // Reset hover state
                               }
                             : null
                     }
@@ -337,7 +329,7 @@ const DispItem = React.memo(({ toggle, nodes }) => {
 
 export default DispItem;
 
-// Preload textures
+// Preload textures to improve performance by avoiding runtime loading
 useTexture.preload('./assets/boardBakedDcmp.webp');
 useTexture.preload('./assets/boardBakedNcmp.webp');
 useTexture.preload('./assets/boardBakedLMAPcmp.webp');

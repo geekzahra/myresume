@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import { useSpring } from '@react-spring/core';
 import { Center, useGLTF, useTexture } from '@react-three/drei';
 import { extend, useFrame } from '@react-three/fiber';
@@ -16,16 +15,20 @@ import PhotoFrame from './photoFrame';
 import TextureMaterial from './textures/TextureMaterial';
 import Windows from './Windows';
 
+// Extend @react-three/fiber to use custom materials like TextureMaterial
 extend({ TextureMaterial });
 
 const RoomModel = React.memo(() => {
+    // Refs for texture materials in the room
     const chairTop = useRef();
     const textureMatFur = useRef();
     const textureMatDes = useRef();
     const textureMatChaorTop = useRef();
 
+    // State to toggle between day and night modes
     const [toggle, setToggle] = useState(0);
 
+    // Update texture materials based on the toggle state using GSAP animations
     useEffect(() => {
         const nightMix = toggle ? 1 : 0;
         gsap.to(textureMatFur.current.uniforms.NightMix, {
@@ -42,6 +45,7 @@ const RoomModel = React.memo(() => {
         });
     }, [toggle]);
 
+    // Spring animation for smooth transitions based on the toggle state
     const [{ x }] = useSpring(
         {
             x: toggle,
@@ -50,6 +54,7 @@ const RoomModel = React.memo(() => {
         [toggle]
     );
 
+    // Update chair rotation based on the elapsed time from the clock
     useFrame(({ clock }) => {
         if (chairTop.current) {
             chairTop.current.rotation.y = Math.sin(
@@ -58,6 +63,7 @@ const RoomModel = React.memo(() => {
         }
     });
 
+    // Controls for adjusting various room settings
     const controls = useControls({
         boardColor: { value: '#ff2d88', label: 'Board Color' },
         boardStrength: { value: 1.35, min: 0, max: 3, step: 0.01 },
@@ -67,33 +73,36 @@ const RoomModel = React.memo(() => {
         deskColorStrngth: { value: 1.55, min: 0, max: 3, step: 0.01 }
     });
 
+    // Load GLTF models for the room and chair
     const roomModel = useGLTF('./assets/RoomModel.glb');
     const chair = useGLTF('./assets/chairtopDraco.glb');
 
+    // Load and configure textures for the room
     const dBaked = useTexture('./assets/bakedTextureDaycmp.webp');
-    dBaked.flipY = false;
-    dBaked.magFilter = THREE.LinearFilter;
-    dBaked.minFilter = THREE.NearestFilter;
-    dBaked.generateMipmaps = false;
+    dBaked.flipY = false; // Prevent vertical flipping
+    dBaked.magFilter = THREE.LinearFilter; // Use linear filtering for magnification
+    dBaked.minFilter = THREE.NearestFilter; // Use nearest filtering for minification
+    dBaked.generateMipmaps = false; // Disable mipmaps for this texture
 
     const nBaked = useTexture('./assets/roomTextureNightcmp.webp');
-    nBaked.flipY = false;
-    nBaked.magFilter = THREE.LinearFilter;
-    nBaked.minFilter = THREE.NearestFilter;
-    nBaked.generateMipmaps = false;
+    nBaked.flipY = false; // Prevent vertical flipping
+    nBaked.magFilter = THREE.LinearFilter; // Use linear filtering for magnification
+    nBaked.minFilter = THREE.NearestFilter; // Use nearest filtering for minification
+    nBaked.generateMipmaps = false; // Disable mipmaps for this texture
 
     const lightMap = useTexture('./assets/roomTextureLightMapcmp.webp');
-    lightMap.flipY = false;
-    lightMap.magFilter = THREE.LinearFilter;
-    lightMap.minFilter = THREE.NearestFilter;
-    lightMap.generateMipmaps = false;
+    lightMap.flipY = false; // Prevent vertical flipping
+    lightMap.magFilter = THREE.LinearFilter; // Use linear filtering for magnification
+    lightMap.minFilter = THREE.NearestFilter; // Use nearest filtering for minification
+    lightMap.generateMipmaps = false; // Disable mipmaps for this texture
 
+    // Memoize texture properties to optimize rendering performance
     const textureMaterialProps = useMemo(
         () => ({
             dbakedm: dBaked,
             nbakedm: nBaked,
             lightMapm: lightMap,
-            NightMix: 0,
+            NightMix: 0, // Initial value for night mix
             lightBoardColor: controls.boardColor,
             lightBoardStrength: controls.boardStrength,
             lightPcColor: controls.pcColor,
@@ -104,12 +113,14 @@ const RoomModel = React.memo(() => {
         [dBaked, nBaked, lightMap, controls]
     );
 
+    // Camera state management from a custom store
     const cameraState = useCameraStore((state) => state.cameraState);
     const defaultState = useCameraStore((state) => state.default);
 
     return (
         <group>
             <Center>
+                {/* Main furniture mesh with texture material */}
                 <mesh
                     geometry={roomModel.nodes.roomFurniture.geometry}
                     position={roomModel.nodes.roomFurniture.position}
@@ -130,6 +141,7 @@ const RoomModel = React.memo(() => {
                     />
                 </mesh>
 
+                {/* Desk shelf mesh with texture material */}
                 <mesh
                     geometry={roomModel.nodes.deskShelfStuf.geometry}
                     position={roomModel.nodes.deskShelfStuf.position}
@@ -144,6 +156,7 @@ const RoomModel = React.memo(() => {
                     />
                 </mesh>
 
+                {/* Chair top mesh with texture material */}
                 <mesh
                     ref={chairTop}
                     geometry={chair.nodes.chairTop.geometry}
@@ -158,6 +171,8 @@ const RoomModel = React.memo(() => {
                         ref={textureMatChaorTop}
                     />
                 </mesh>
+
+                {/* Additional components in the room */}
                 <PhotoFrame toggle={toggle} nodes={roomModel.nodes} />
                 <DispFrame nodes={roomModel.nodes} />
                 <DispItem toggle={toggle} nodes={roomModel.nodes} />
@@ -171,6 +186,7 @@ const RoomModel = React.memo(() => {
 
 export default RoomModel;
 
+// Preload models and textures to improve performance by avoiding runtime loading
 useGLTF.preload('./assets/RoomModel.glb');
 useGLTF.preload('./assets/chairtopDraco.glb');
 useTexture.preload('./assets/bakedTextureDaycmp.webp');
