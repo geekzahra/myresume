@@ -96,7 +96,6 @@ This project is licensed under the [MIT License](LICENSE).
 **For more information, [contact me](mailto:geekzahra@gmail.com).**
 
 Happy coding!
-```
 
 ### Key Points to Customize:
 
