@@ -1,3 +1,4 @@
+// imports
 import { CameraControls } from '@react-three/drei';
 import { useRef } from 'react';
 import { useEffect } from 'react';
@@ -5,10 +6,10 @@ import { useEffect } from 'react';
 import { useCameraStore } from '../helper/CameraStore';
 
 export const CameraManager = () => {
-    const cameraControle = useRef();
+    const cameraControle = useRef(); // Create a reference to control the camera
 
+    // Retrieve camera state and various settings from the custom store
     const cameraState = useCameraStore((state) => state.cameraState);
-
     const maxDistance = useCameraStore((state) => state.maxDistance);
     const minDistance = useCameraStore((state) => state.minDistance);
     const maxAzimuthAngle = useCameraStore((state) => state.maxAzimuthAngle);
@@ -19,8 +20,10 @@ export const CameraManager = () => {
     const dollyToCursor = useCameraStore((state) => state.dollyToCursor);
     const enable = useCameraStore((state) => state.enable);
 
+    // useEffect hook to update camera settings based on the current camera state
     useEffect(() => {
         if (cameraState === 'default') {
+            // Default camera settings
             useCameraStore.setState({ truckSpeed: 0.5 });
             useCameraStore.setState({ dollyToCursor: true });
             useCameraStore.setState({ minDistance: 2 });
@@ -33,6 +36,7 @@ export const CameraManager = () => {
         }
 
         if (cameraState === 'desktop') {
+            // Settings for desktop view
             useCameraStore.setState({ truckSpeed: 0 });
             useCameraStore.setState({ dollyToCursor: false });
             useCameraStore.setState({ minDistance: 5.65 });
@@ -45,6 +49,7 @@ export const CameraManager = () => {
         }
 
         if (cameraState === 'laptop') {
+            // Settings for laptop view
             useCameraStore.setState({ truckSpeed: 0 });
             useCameraStore.setState({ dollyToCursor: false });
             useCameraStore.setState({ minDistance: 4.2 });
@@ -57,6 +62,7 @@ export const CameraManager = () => {
         }
 
         if (cameraState === 'tv') {
+            // Settings for TV view
             useCameraStore.setState({ truckSpeed: 0 });
             useCameraStore.setState({ dollyToCursor: false });
             useCameraStore.setState({ minDistance: 5.6 });
@@ -69,6 +75,7 @@ export const CameraManager = () => {
         }
 
         if (cameraState === 'smartphone') {
+            // Settings for smartphone view
             useCameraStore.setState({ truckSpeed: 0 });
             useCameraStore.setState({ dollyToCursor: false });
             useCameraStore.setState({ minDistance: 8.8 });
@@ -89,6 +96,7 @@ export const CameraManager = () => {
         }
 
         if (cameraState === 'displayBoard') {
+            // Settings for display board view
             useCameraStore.setState({ truckSpeed: 0 });
             useCameraStore.setState({ dollyToCursor: true });
             useCameraStore.setState({ minDistance: 4 });
@@ -109,28 +117,29 @@ export const CameraManager = () => {
         }
     });
 
+    // Render the CameraControls component with the current settings
     return (
         <CameraControls
-            makeDefault={true}
-            ref={cameraControle}
-            dollyToCursor={dollyToCursor}
-            dollySpeed={1.2}
-            truckSpeed={truckSpeed}
-            minDistance={minDistance}
-            maxDistance={maxDistance}
-            smoothTime={0.8}
-            maxAzimuthAngle={maxAzimuthAngle}
-            minAzimuthAngle={minAzimuthAngle}
-            minPolarAngle={minPolarAngle}
-            maxPolarAngle={maxPolarAngle}
-            polarRotateSpeed={0.3}
-            azimuthRotateSpeed={0.3}
-            maxSpeed={20}
-            enableTransition={true}
-            boundaryFriction={0}
-            boundaryEnclosesCamera={true}
-            interactiveArea={[0.5, 0.5, 1, 1]}
-            enabled={enable}
+            makeDefault={true} // Make this the default camera control
+            ref={cameraControle} // Reference to access the camera control programmatically
+            dollyToCursor={dollyToCursor} // Enable/disable dolly to cursor behavior
+            dollySpeed={1.2} // Set dolly speed
+            truckSpeed={truckSpeed} // Set truck speed (panning speed)
+            minDistance={minDistance} // Set minimum camera distance
+            maxDistance={maxDistance} // Set maximum camera distance
+            smoothTime={0.8} // Set smoothing time for transitions
+            maxAzimuthAngle={maxAzimuthAngle} // Set max horizontal rotation angle
+            minAzimuthAngle={minAzimuthAngle} // Set min horizontal rotation angle
+            minPolarAngle={minPolarAngle} // Set min vertical rotation angle
+            maxPolarAngle={maxPolarAngle} // Set max vertical rotation angle
+            polarRotateSpeed={0.3} // Set rotation speed for vertical axis
+            azimuthRotateSpeed={0.3} // Set rotation speed for horizontal axis
+            maxSpeed={20} // Set maximum speed for movement
+            enableTransition={true} // Enable smooth transitions
+            boundaryFriction={0} // Disable boundary friction
+            boundaryEnclosesCamera={true} // Allow the camera to be enclosed by boundaries
+            interactiveArea={[0.5, 0.5, 1, 1]} // Set interactive area on the screen
+            enabled={enable} // Toggle camera controls on or off
         />
     );
 };
