@@ -89,7 +89,7 @@ Please ensure your code follows the existing style and passes all tests.
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the MIT License.
 
 ---
 
