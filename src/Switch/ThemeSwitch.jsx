@@ -3,7 +3,7 @@ import { a } from '@react-spring/three';
 import { meshBounds } from '@react-three/drei';
 import { useCallback, useEffect, useState } from 'react';
 
-export default function TheamSwitch({ x, set, nodes }) {
+export default function ThemeSwitch({ x, set, nodes }) {
     const [hovered, setHover] = useState(false);
 
     useEffect(

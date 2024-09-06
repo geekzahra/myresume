@@ -7,7 +7,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 
 import { useCameraStore } from '../helper/CameraStore';
-import TheamSwitch from '../Switch/TheamSwitch';
+import ThemeSwitch from '../Switch/ThemeSwitch';
 import Clock from './clock';
 import DispFrame from './DispFrame';
 import DispItem from './dispItem';
@@ -178,7 +178,7 @@ const RoomModel = React.memo(() => {
                 <DispItem toggle={toggle} nodes={roomModel.nodes} />
                 <Clock />
                 <Windows toggle={toggle} nodes={roomModel.nodes} />
-                <TheamSwitch x={x} set={setToggle} nodes={roomModel.nodes} />
+                <ThemeSwitch x={x} set={setToggle} nodes={roomModel.nodes} />
             </Center>
         </group>
     );
