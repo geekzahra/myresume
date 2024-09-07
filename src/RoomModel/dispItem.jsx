@@ -38,19 +38,19 @@ const DispItem = React.memo(({ toggle, nodes }) => {
     }, [toggle]);
 
     // Load textures for different displays
-    const dBakeddisp = useTexture('./assets/boardBakedDcmp.webp');
+    const dBakeddisp = useTexture('./assets/textures/boardBakedDcmp.webp');
     dBakeddisp.flipY = false; // Correct orientation for textures
     dBakeddisp.magFilter = THREE.LinearFilter; // Texture filter for magnification
     dBakeddisp.minFilter = THREE.NearestFilter; // Texture filter for minification
     dBakeddisp.generateMipmaps = false; // Disable mipmap generation to save resources
 
-    const nBakeddisp = useTexture('./assets/boardBakedNcmp.webp');
+    const nBakeddisp = useTexture('./assets/textures/boardBakedNcmp.webp');
     nBakeddisp.flipY = false;
     nBakeddisp.magFilter = THREE.LinearFilter;
     nBakeddisp.minFilter = THREE.NearestFilter;
     nBakeddisp.generateMipmaps = false;
 
-    const lightMapdisp = useTexture('./assets/boardBakedLMAPcmp.webp');
+    const lightMapdisp = useTexture('./assets/textures/boardBakedLMAPcmp.webp');
     lightMapdisp.flipY = false;
     lightMapdisp.magFilter = THREE.LinearFilter;
     lightMapdisp.minFilter = THREE.NearestFilter;
@@ -330,6 +330,6 @@ const DispItem = React.memo(({ toggle, nodes }) => {
 export default DispItem;
 
 // Preload textures to improve performance by avoiding runtime loading
-useTexture.preload('./assets/boardBakedDcmp.webp');
-useTexture.preload('./assets/boardBakedNcmp.webp');
-useTexture.preload('./assets/boardBakedLMAPcmp.webp');
+useTexture.preload('./assets/textures/boardBakedDcmp.webp');
+useTexture.preload('./assets/textures/boardBakedNcmp.webp');
+useTexture.preload('./assets/textures/boardBakedLMAPcmp.webp');

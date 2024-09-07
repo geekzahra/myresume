@@ -13,16 +13,16 @@ const LaptopDisp = React.memo(({ nodes }) => {
     const sunflower = useRef();
 
     // Load textures for different states (paused and playing) for each display
-    const AutumnPause = useTexture('./assets/laptopDisp/AutumnPaus.jpg');
-    const AutumnPlay = useTexture('./assets/laptopDisp/AutumnPlay.jpg');
-    const christmasPause = useTexture('./assets/laptopDisp/christmasLightPaus.jpg');
-    const christmasPlay = useTexture('./assets/laptopDisp/christmasLightPlay.jpg');
-    const clarityPause = useTexture('./assets/laptopDisp/clarityPaus.jpg');
-    const clarityPlay = useTexture('./assets/laptopDisp/clarityPlay.jpg');
-    const comeAndGetPause = useTexture('./assets/laptopDisp/comeAndGetYourLovePause.jpg');
-    const comeAndGetPlay = useTexture('./assets/laptopDisp/comeAndGetYourLovePlay.jpg');
-    const sunflowerPause = useTexture('./assets/laptopDisp/sunflowerPaus.jpg');
-    const sunflowerPlay = useTexture('./assets/laptopDisp/sunflowerPlay.jpg');
+    const AutumnPause = useTexture('./assets/images/AutumnPaus.jpg');
+    const AutumnPlay = useTexture('./assets/images/AutumnPlay.jpg');
+    const christmasPause = useTexture('./assets/images/christmasLightPaus.jpg');
+    const christmasPlay = useTexture('./assets/images/christmasLightPlay.jpg');
+    const clarityPause = useTexture('./assets/images/clarityPaus.jpg');
+    const clarityPlay = useTexture('./assets/images/clarityPlay.jpg');
+    const comeAndGetPause = useTexture('./assets/images/comeAndGetYourLovePause.jpg');
+    const comeAndGetPlay = useTexture('./assets/images/comeAndGetYourLovePlay.jpg');
+    const sunflowerPause = useTexture('./assets/images/sunflowerPaus.jpg');
+    const sunflowerPlay = useTexture('./assets/images/sunflowerPlay.jpg');
 
     // State to manage hover effects
     const [hovered, setHover] = useState(false);
@@ -33,11 +33,11 @@ const LaptopDisp = React.memo(({ nodes }) => {
     const sounds = useRef({});
     // Object holding the paths to audio files
     const audioFiles = useRef({
-        Autumn: './assets/laptopDisp/audio/AutumnLeavesCover.mp3',
-        Christmas: './assets/laptopDisp/audio/ChristmasLights.mp3',
-        Clarity: './assets/laptopDisp/audio/Clarity.mp3',
-        ComeAndGet: './assets/laptopDisp/audio/ComeAndGetYourLove.mp3',
-        Sunflower: './assets/laptopDisp/audio/Sunflower.mp3'
+        Autumn: './assets/audio/AutumnLeavesCover.mp3',
+        Christmas: './assets/audio/ChristmasLights.mp3',
+        Clarity: './assets/audio/Clarity.mp3',
+        ComeAndGet: './assets/audio/ComeAndGetYourLove.mp3',
+        Sunflower: './assets/audio/Sunflower.mp3'
     }).current;
 
     // Initialize Howl instances for audio files
@@ -177,13 +177,13 @@ const LaptopDisp = React.memo(({ nodes }) => {
 export default LaptopDisp;
 
 // Preload textures to improve performance by avoiding runtime loading
-useTexture.preload('./assets/laptopDisp/AutumnPaus.jpg');
-useTexture.preload('./assets/laptopDisp/AutumnPlay.jpg');
-useTexture.preload('./assets/laptopDisp/christmasLightPaus.jpg');
-useTexture.preload('./assets/laptopDisp/christmasLightPlay.jpg');
-useTexture.preload('./assets/laptopDisp/clarityPaus.jpg');
-useTexture.preload('./assets/laptopDisp/clarityPlay.jpg');
-useTexture.preload('./assets/laptopDisp/comeAndGetYourLovePause.jpg');
-useTexture.preload('./assets/laptopDisp/comeAndGetYourLovePlay.jpg');
-useTexture.preload('./assets/laptopDisp/sunflowerPaus.jpg');
-useTexture.preload('./assets/laptopDisp/sunflowerPlay.jpg');
+useTexture.preload('./assets/images/AutumnPaus.jpg');
+useTexture.preload('./assets/images/AutumnPlay.jpg');
+useTexture.preload('./assets/images/christmasLightPaus.jpg');
+useTexture.preload('./assets/images/christmasLightPlay.jpg');
+useTexture.preload('./assets/images/clarityPaus.jpg');
+useTexture.preload('./assets/images/clarityPlay.jpg');
+useTexture.preload('./assets/images/comeAndGetYourLovePause.jpg');
+useTexture.preload('./assets/images/comeAndGetYourLovePlay.jpg');
+useTexture.preload('./assets/images/sunflowerPaus.jpg');
+useTexture.preload('./assets/images/sunflowerPlay.jpg');

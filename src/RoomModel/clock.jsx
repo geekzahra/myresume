@@ -6,7 +6,7 @@ import * as THREE from 'three'; // Import core THREE.js utilities
 // Memoized component to optimize rendering
 const Clock = React.memo(() => {
     // Load the GLTF model of the clock using useGLTF hook
-    const { nodes } = useGLTF('./assets/clock.glb');
+    const { nodes } = useGLTF('./assets/models/clock.glb');
 
     // Create references for the clock's hour, minute, and second hands
     const hourRef = useRef();
@@ -88,4 +88,4 @@ const Clock = React.memo(() => {
 export default Clock;
 
 // Preload the clock GLTF model to improve performance
-useGLTF.preload('./assets/clock.glb');
+useGLTF.preload('./assets/models/clock.glb');

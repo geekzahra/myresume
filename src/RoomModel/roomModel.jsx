@@ -74,23 +74,23 @@ const RoomModel = React.memo(() => {
     });
 
     // Load GLTF models for the room and chair
-    const roomModel = useGLTF('./assets/RoomModel.glb');
-    const chair = useGLTF('./assets/chairtopDraco.glb');
+    const roomModel = useGLTF('./assets/models/RoomModel.glb');
+    const chair = useGLTF('./assets/models/chairtopDraco.glb');
 
     // Load and configure textures for the room
-    const dBaked = useTexture('./assets/bakedTextureDaycmp.webp');
+    const dBaked = useTexture('./assets/textures/bakedTextureDaycmp.webp');
     dBaked.flipY = false; // Prevent vertical flipping
     dBaked.magFilter = THREE.LinearFilter; // Use linear filtering for magnification
     dBaked.minFilter = THREE.NearestFilter; // Use nearest filtering for minification
     dBaked.generateMipmaps = false; // Disable mipmaps for this texture
 
-    const nBaked = useTexture('./assets/roomTextureNightcmp.webp');
+    const nBaked = useTexture('./assets/textures/roomTextureNightcmp.webp');
     nBaked.flipY = false; // Prevent vertical flipping
     nBaked.magFilter = THREE.LinearFilter; // Use linear filtering for magnification
     nBaked.minFilter = THREE.NearestFilter; // Use nearest filtering for minification
     nBaked.generateMipmaps = false; // Disable mipmaps for this texture
 
-    const lightMap = useTexture('./assets/roomTextureLightMapcmp.webp');
+    const lightMap = useTexture('./assets/textures/roomTextureLightMapcmp.webp');
     lightMap.flipY = false; // Prevent vertical flipping
     lightMap.magFilter = THREE.LinearFilter; // Use linear filtering for magnification
     lightMap.minFilter = THREE.NearestFilter; // Use nearest filtering for minification
@@ -187,8 +187,8 @@ const RoomModel = React.memo(() => {
 export default RoomModel;
 
 // Preload models and textures to improve performance by avoiding runtime loading
-useGLTF.preload('./assets/RoomModel.glb');
-useGLTF.preload('./assets/chairtopDraco.glb');
-useTexture.preload('./assets/bakedTextureDaycmp.webp');
-useTexture.preload('./assets/roomTextureNightcmp.webp');
-useTexture.preload('./assets/roomTextureLightMapcmp.webp');
+useGLTF.preload('./assets/models/RoomModel.glb');
+useGLTF.preload('./assets/models/chairtopDraco.glb');
+useTexture.preload('./assets/textures/bakedTextureDaycmp.webp');
+useTexture.preload('./assets/textures/roomTextureNightcmp.webp');
+useTexture.preload('./assets/textures/roomTextureLightMapcmp.webp');

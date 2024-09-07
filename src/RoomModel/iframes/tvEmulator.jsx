@@ -6,7 +6,7 @@ import { useCameraStore } from '../../helper/CameraStore'; // Import Zustand sto
 
 // Memoized TvEmulator component for better performance
 const TvEmulator = React.memo(() => {
-    const rom = './assets/SuperMarioAdvance4.gba'; // Path to the ROM file for the emulator
+    const rom = './assets/games/SuperMarioAdvance4.gba'; // Path to the ROM file for the emulator
 
     const cameraState = useCameraStore((state) => state.cameraState); // Access current camera state from the store
     const isTv = useMemo(() => cameraState === 'tv', [cameraState]); // Memoized check if camera state is 'tv'

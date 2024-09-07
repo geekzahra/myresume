@@ -14,9 +14,9 @@ const PhotoFrame = React.memo(({ toggle, nodes }) => {
     const frame = useRef();
 
     // Load textures for different frame states
-    const dayFrame = useTexture('./assets/bakeFrameDaycmp.webp');
-    const nightFrame = useTexture('./assets/bakeFrameNightcmp.webp');
-    const lightMapFrame = useTexture('./assets/bakeFrameLightMapcmp.webp');
+    const dayFrame = useTexture('./assets/textures/bakeFrameDaycmp.webp');
+    const nightFrame = useTexture('./assets/textures/bakeFrameNightcmp.webp');
+    const lightMapFrame = useTexture('./assets/textures/bakeFrameLightMapcmp.webp');
 
     // Memoize texture properties to avoid unnecessary recalculations
     const textureProps = useMemo(() => {
@@ -70,6 +70,6 @@ const PhotoFrame = React.memo(({ toggle, nodes }) => {
 export default PhotoFrame;
 
 // Preload textures to improve performance by avoiding runtime loading
-useTexture.preload('./assets/bakeFrameDaycmp.webp');
-useTexture.preload('./assets/bakeFrameNightcmp.webp');
-useTexture.preload('./assets/bakeFrameLightMapcmp.webp');
+useTexture.preload('./assets/textures/bakeFrameDaycmp.webp');
+useTexture.preload('./assets/textures/bakeFrameNightcmp.webp');
+useTexture.preload('./assets/textures/bakeFrameLightMapcmp.webp');

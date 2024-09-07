@@ -35,10 +35,10 @@ const DispFrame = React.memo(({ nodes }) => {
     const onPointerOut = useCallback(() => setHover(false), []);
 
     // Load video textures for desktop and TV displays, and image textures for smartphone and background
-    const desktopWallpaper = useVideoTexture('./assets/desktopWallpaper.mp4');
-    const tvWallpaper = useVideoTexture('./assets/marioWallpaper.mp4');
-    const smartphoneWallpaper = useTexture('./assets/smartphoneWallpaper.webp');
-    const musicBg = useTexture('./assets/SpotifyClone.webp');
+    const desktopWallpaper = useVideoTexture('./assets/videos/desktopWallpaper.mp4');
+    const tvWallpaper = useVideoTexture('./assets/videos/marioWallpaper.mp4');
+    const smartphoneWallpaper = useTexture('./assets/images/smartphoneWallpaper.webp');
+    const musicBg = useTexture('./assets/images/SpotifyClone.webp');
 
     return (
         <>
@@ -243,5 +243,5 @@ const DispFrame = React.memo(({ nodes }) => {
 export default DispFrame;
 
 // Preload textures to improve performance during runtime
-useTexture.preload('./assets/smartphoneWallpaper.webp');
-useTexture.preload('./assets/SpotifyClone.webp');
+useTexture.preload('./assets/images/smartphoneWallpaper.webp');
+useTexture.preload('./assets/images/SpotifyClone.webp');
