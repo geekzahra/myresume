@@ -10,7 +10,7 @@ import React, { Suspense } from 'react'; // React and Suspense for lazy loading
 import './style.css'; // Importing CSS for styling
 
 import { CameraManager } from './CameraManager/CameraManager'; // Camera management component
-import RoomModel from './RoomModel/roomModel'; // 3D room model component
+import RoomModel from './RoomModel/RoomModel'; // 3D room model component
 
 const Experience = React.memo(() => {
     return (

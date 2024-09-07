@@ -6,7 +6,7 @@ import { useCameraStore } from '../helper/CameraStore';
 import DesktopiFrame from './iframes/desktopiFrame';
 import SmartphoneiFrame from './iframes/smartphoneiFrame';
 import TvEmulator from './iframes/tvEmulator';
-import LaptopDisp from './laptopDisp';
+import LaptopDisp from './LaptopDisplay';
 
 const DispFrame = React.memo(({ nodes }) => {
     // Access camera state and display states from the camera store

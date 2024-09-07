@@ -8,10 +8,10 @@ import * as THREE from 'three';
 
 import { useCameraStore } from '../helper/CameraStore';
 import ThemeSwitch from '../Switch/ThemeSwitch';
-import Clock from './clock';
-import DispFrame from './DispFrame';
-import DispItem from './dispItem';
-import PhotoFrame from './photoFrame';
+import Clock from './Clock';
+import DispFrame from './DisplayFrame';
+import DispItem from './DisplayItem';
+import PhotoFrame from './PhotoFrame';
 import TextureMaterial from './textures/TextureMaterial';
 import Windows from './Windows';
 
