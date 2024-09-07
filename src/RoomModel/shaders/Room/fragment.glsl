@@ -15,7 +15,7 @@ uniform float lightDeskStrength;
 
 varying vec2 vUv;
 
-#include "../partials/blend.glsl"
+#include "../Partials/blend.glsl"
 
 void main(){
 
