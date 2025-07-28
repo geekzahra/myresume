@@ -27,3 +27,59 @@ body,
     border-radius: 10px;
     font-family: 'Arial', sans-serif;
 }
+
+.right-side-menu {
+    position: fixed;
+    top: 0;
+    right: -19%;
+    width: 250px;
+    height: 100%;
+    background-color: rgba(41, 45, 57);
+    color: white;
+    transition: right 0.3s ease;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.right-side-menu.open {
+    right: 0;
+}
+
+.help-text {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin-top: 50px;
+}
+
+.close-button{
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 10px 30px;
+    background-color: white;
+    color: rgba(41, 45, 57, 0.8);
+    border: none;
+    cursor: pointer;
+    z-index: 11;
+    border-radius: 5px;
+}
+
+.sticky-menu-button {
+    font-size: 1.4rem;
+    position: absolute;
+    left: -56%;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    padding: 20px 50px;
+    background-color: rgba(41, 45, 57, 0.8);
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 11;
+    border-radius: 5px 5px 0 0;
+}
+
+.sticky-menu-button:hover {
+    background-color: rgba(41, 45, 57);
+}
