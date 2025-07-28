@@ -9,7 +9,7 @@ import {
 } from '@react-three/postprocessing'; // Post-processing effects
 import './style.css'; // Importing CSS for styling
 import { CameraManager } from './CameraManager/CameraManager'; // Camera management component
-import RoomModel from './RoomModel/RoomModel'; // 3D room model component
+import RoomModel from './RoomModel/RoomModel.jsx'; // 3D room model component - fixed extension
 
 const Experience = React.memo(() => {
     const [menuOpen, setMenuOpen] = useState(false); // State to control menu visibility
